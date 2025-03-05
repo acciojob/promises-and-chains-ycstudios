@@ -1,25 +1,27 @@
-//your JS code here. If required.
-const ageInput = document.getElementById('age');
-const nameInput = document.getElementById('name');
-const btn = document.getElementById('btn');
+ const form = document.getElementById('votingForm');
+        const ageInput = document.getElementById('age');
+        const nameInput = document.getElementById('name');
 
-btn.addEventListener('click', () => {
-    const name = nameInput.value.trim();
-    const age = parseInt(ageInput.value); 
-    if (!name || isNaN(age)) {
-        alert('Please enter valid details.');
-        return;
-    }
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form from reloading the page
 
-    new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (age > 18) {
-                resolve(`Welcome, ${name}. You can vote.`);
-            } else {
-                reject(`Oh sorry ${name}. You aren't old enough.`);
+            const userName = nameInput.value.trim();
+            const userAge = parseInt(ageInput.value);
+
+            if (!userName || isNaN(userAge)) {
+                alert('Please enter valid details.');
+                return;
             }
-        }, 4000);
-    })
-    .then((message) => alert(message))
-    .catch((error) => alert(error));
-});
+
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (userAge > 18) {
+                        resolve(`Welcome, ${userName}. You can vote.`);
+                    } else {
+                        reject(`Oh sorry ${userName}. You aren't old enough.`);
+                    }
+                }, 4000);
+            })
+            .then((message) => alert(message))
+            .catch((error) => alert(error));
+        });
